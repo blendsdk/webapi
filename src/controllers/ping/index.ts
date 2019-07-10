@@ -5,13 +5,13 @@ import { check } from "express-validator";
 function pong(name: string): Promise<string> {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(`Pong ${name}`)
-        }, 2000)
-    })
+            resolve(`Pong ${name}`);
+        }, 2000);
+    });
 }
 
 async function handler(req: Request, res: Response) {
-    const { name } = req.query || req.body
+    const { name } = req.query || req.body;
     response(res).OK(await pong(name));
 }
 
@@ -22,4 +22,4 @@ const pingController = [
     withRequestValidation(handler)
 ];
 
-export { pingController }
+export { pingController };

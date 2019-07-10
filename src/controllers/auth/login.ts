@@ -3,7 +3,7 @@ import { response, withRequestValidation } from "@blendsdk/express";
 import { check } from "express-validator";
 
 async function handler(req: Request, res: Response) {
-    const { name } = req.query || req.body
+    const { name } = req.query || req.body;
     response(res).OK({});
 }
 
@@ -13,4 +13,4 @@ const loginController = [
     withRequestValidation(handler)
 ];
 
-export { loginController }
+export { loginController };
