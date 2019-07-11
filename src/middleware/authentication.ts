@@ -37,7 +37,7 @@ function getJWTSecret(): string {
         return process.env.JWT;
     } else {
         logger.warn("No JWT token was provided from .env!");
-        return process.geteuid().toString();
+        return process.pid.toString();
     }
 }
 
