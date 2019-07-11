@@ -11,7 +11,7 @@ import { loginController } from "./controllers/auth";
 export function defineRoutes(app: Express) {
 
     // authentication
-    app.post("/api/v1/login", ...loginController);
+    app.post("/api/login", ...loginController);
 
     // ping
     app.get("/api/v1/ping", ...pingController);
