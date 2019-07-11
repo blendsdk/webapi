@@ -19,6 +19,7 @@ sys_config
 sys_user.primaryKeyColumn("user_id")
     .stringColumn("username", { unique: true })
     .stringColumn("password")
+    .stringColumn("email", { unique: true })
     .booleanColumn("is_active");
 
 sys_role.primaryKeyColumn("role_id")
@@ -34,7 +35,6 @@ sys_profile
     .stringColumn("title", { required: false })
     .stringColumn("first_name")
     .stringColumn("last_name")
-    .stringColumn("email", { unique: true })
     .referenceColumn("user_id", sys_user);
 
 export {schema};

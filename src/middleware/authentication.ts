@@ -115,35 +115,35 @@ export function is_authenticated(
  * @param {(string | string[])} role
  * @returns {RequestHandler}
  */
-// export function has_role(role: string | string[]): RequestHandler {
-//     const builder = (roles: string[]): RequestHandler => {
-//         return (req: Request, res: Response, next: NextFunction) => {
-//             const user: any = authenticatedUser(req);
-//             if (user) {
-//                 if (isArray(user.roles)) {
-//                     let check = false;
-//                     roles.forEach((r: string) => {
-//                         user.roles.forEach((i: any) => {
-//                             if (i.title === r || i.title === "ADMIN") {
-//                                 check = true;
-//                             }
-//                         });
-//                     });
-//                     if (check) {
-//                         next();
-//                     } else {
-//                         response(res).unAuthorized(
-//                             `The user is not assigned to role${role.length > 1 ? "s" : ""}: ${roles.join(", ")}`
-//                         );
-//                     }
-//                 } else {
-//                     response(res).serverError("Invalid roles object!");
-//                 }
-//             } else {
-//                 response(res).unAuthorized("The user is not authorized!");
-//             }
-//         };
-//     };
+export function has_role(role: string | string[]): RequestHandler {
+    const builder = (roles: string[]): RequestHandler => {
+        return (req: Request, res: Response, next: NextFunction) => {
+            const user: IAuthenticatedUser = authenticatedUser<IAuthenticatedUser>(req);
+            if (user) {
+                if (isArray(user.roles)) {
+                    let check = false;
+                    roles.forEach((r: string) => {
+                        user.roles.forEach((i: any) => {
+                            if (i.title === r || i.title === "ADMIN") {
+                                check = true;
+                            }
+                        });
+                    });
+                    if (check) {
+                        next();
+                    } else {
+                        response(res).unAuthorized(
+                            `The user is not assigned to role${role.length > 1 ? "s" : ""}: ${roles.join(", ")}`
+                        );
+                    }
+                } else {
+                    response(res).serverError("Invalid roles object!");
+                }
+            } else {
+                response(res).unAuthorized("The user is not authorized!");
+            }
+        };
+    };
 
-//     return builder(wrapInArray(role));
-// }
+    return builder(wrapInArray(role));
+}
