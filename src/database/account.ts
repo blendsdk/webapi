@@ -9,6 +9,10 @@ export const deleteUserByUserID = sql_query<ISysUser, { user_id: number }>(
     { single: true }
 );
 
+
+/**
+ * Adds a sys.user record
+ */
 export const addUser = sql_insert<ISysUser, ISysUser>("sys.user", {
     inConverter: (record: ISysUser) => {
         const salt = bcrypt.genSaltSync(12);
@@ -17,6 +21,9 @@ export const addUser = sql_insert<ISysUser, ISysUser>("sys.user", {
     }
 });
 
+/**
+ * Find s user by username or email
+ */
 export const findUserByUsernameOrEmail = sql_query<ISysUser, { username: string }>(
     `
         select
@@ -31,6 +38,9 @@ export const findUserByUsernameOrEmail = sql_query<ISysUser, { username: string 
 );
 
 
+/**
+ * Gets user roles by user ID
+ */
 export const getUserRolesByUserID = sql_query<ISysRole[], { user_id: number }>(
     `
         select

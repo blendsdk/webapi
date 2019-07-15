@@ -9,7 +9,15 @@ export interface IValidateUserResult {
     user?: IAuthenticatedUser;
 }
 
-
+/**
+ * Given a username and a password this function validates the user
+ * and returns the results.
+ *
+ * @export
+ * @param {string} username
+ * @param {string} password
+ * @returns {Promise<IValidateUserResult>}
+ */
 export function validateUser(username: string, password: string): Promise<IValidateUserResult> {
     return new Promise(async (resolve, reject) => {
         try {

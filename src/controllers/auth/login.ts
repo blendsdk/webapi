@@ -17,6 +17,13 @@ export interface IJwtTokenResult {
     token: string;
 }
 
+/**
+ * Validates the user and provides a JWT authentication token.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @returns
+ */
 async function handler(req: Request, res: Response) {
     const { username, password } = req.body;
     try {
