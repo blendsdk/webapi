@@ -32,12 +32,12 @@ export interface IAuthenticatedUser extends ISysUser {
  *
  * @returns {string}
  */
-function getJWTSecret(): string {
+export function getJWTSecret(): string {
     if (process.env.JWT_SECRET) {
-        return process.env.JWT;
+        return process.env.JWT_SECRET;
     } else {
         logger.warn("No JWT token was provided from .env!");
-        return process.pid.toString();
+        return process.cwd();
     }
 }
 

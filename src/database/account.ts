@@ -1,26 +1,44 @@
-import { sql_query } from "@blendsdk/sqlkit";
-import { ISysUser } from "./dbtypes";
 
-export const findUserByUsernameOrEmail = sql_query<ISysUser,unknown>(
+import { sql_query, sql_insert } from "@blendsdk/sqlkit";
+import { ISysUser, ISysRole } from "./dbtypes";
+import bcrypt from "bcryptjs";
+
+export const deleteUserByUserID = sql_query<ISysUser, { user_id: number }>(
+    `delete from sys.user where user_id = :user_id returning *`
+    ,
+    { single: true }
+);
+
+export const addUser = sql_insert<ISysUser, ISysUser>("sys.user", {
+    inConverter: (record: ISysUser) => {
+        const salt = bcrypt.genSaltSync(12);
+        record.password = bcrypt.hashSync(record.password, salt);
+        return record;
+    }
+});
+
+export const findUserByUsernameOrEmail = sql_query<ISysUser, { username: string }>(
     `
-        SELECT 
+        select
             *
-        FROM
+        from
             sys.user
-        WHERE
-            lowecase(username) = lowecase(:username) OR
-            lowecase(email) = lowercase(:email)
+        where
+            lower(username) = lower(:username) OR
+            lower(email) = lower(:username)
     `
     , { single: true }
 );
 
 
-export const findRolesByUserID = sql_query<{roles:string[]},{user_id:number}>(
+export const getUserRolesByUserID = sql_query<ISysRole[], { user_id: number }>(
     `
-        SELECT 
-            *
-        FROM
-            sys.user
-
+        select
+            r.*
+        from
+            sys.role r
+            inner join sys.user_role ur on r.role_id = ur.role_id
+        where
+            ur.user_id = :user_id
     `
 );

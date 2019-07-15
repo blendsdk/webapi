@@ -4,8 +4,8 @@ import * as path from "path";
 const schema = new PostgreSQLDatabase();
 
 //// SYSTEM Tables
-const 
-    sys_config = schema.addTable('sys.config'),
+const
+    sys_config = schema.addTable("sys.config"),
     sys_user = schema.addTable("sys.user"),
     sys_role = schema.addTable("sys.role"),
     sys_user_role = schema.addTable("sys.user_role"),
@@ -13,14 +13,14 @@ const
 
 sys_config
     .primaryKeyColumn("config_id")
-    .stringColumn("config",{unique:true})
+    .stringColumn("config", { unique: true })
     .stringColumn("value");
 
 sys_user.primaryKeyColumn("user_id")
     .stringColumn("username", { unique: true })
     .stringColumn("password")
     .stringColumn("email", { unique: true })
-    .booleanColumn("is_active");
+    .booleanColumn("is_active", { default: "true" });
 
 sys_role.primaryKeyColumn("role_id")
     .stringColumn("role_name", { unique: true });
@@ -37,5 +37,5 @@ sys_profile
     .stringColumn("last_name")
     .referenceColumn("user_id", sys_user);
 
-export {schema};
+export { schema };
 createTypes(path.join(process.cwd(), "src", "database", "dbtypes.ts"), schema.getTables());

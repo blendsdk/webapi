@@ -1,11 +1,14 @@
 import axios from "axios";
 import * as fs from "fs";
 import * as path from "path";
+import dotenv from "dotenv";
+import { closeConnection, createConnection } from "@blendsdk/sqlkit";
+
+dotenv.config({ path: ".env.test" });
 
 let token: any = null;
 let last_data: any = null;
 let last_api: any = null;
-
 
 const save_vars = (id: string, data: any) => {
 	const fileName = path.join(process.cwd(), `.testvars-${id}.json`);
@@ -18,21 +21,21 @@ const load_vars = (id: string) => {
 };
 
 
-const login = (username: string, password: string, callback: Function) => {
-	axios.post("http://127.0.0.1:3000/api/login", {
-		username: username,
-		password: password
-	})
-		.then((res) => {
-			token = res.data.token;
-			if (callback) {
-				callback();
-			}
+const login = async (username: string, password: string): Promise<boolean> => {
+	return new Promise((resolve, reject) => {
+		axios.post("http://127.0.0.1:3000/api/login", {
+			username: username,
+			password: password
 		})
-		.catch((error) => {
-			console.log(JSON.stringify(error));
-			throw error;
-		});
+			.then((res) => {
+				token = res.data.token;
+				resolve(true);
+			})
+			.catch((error) => {
+				console.log(JSON.stringify(error.response.data, null, 4));
+				reject(error.response.data);
+			});
+	});
 };
 
 const api_call = (method: string, api: string, data: any, callback: Function) => {
@@ -77,6 +80,15 @@ const PATCH = (api: string, data: any, callback: Function) => {
 const DELETE = (api: string, data: any, callback: Function) => {
 	api_call("delete", api, data, callback);
 };
+
+afterAll(async () => {
+	await closeConnection();
+});
+
+beforeAll(async () => {
+	const conn = createConnection();
+	await conn.query(fs.readFileSync(path.join(process.cwd(), "src", "tests", "seed.sql")).toString());
+});
 
 export {
 	POST,

@@ -20,6 +20,7 @@ export interface ISysUser {
     user_id?: number;
     username?: string;
     password?: string;
+    email?: string;
     is_active?: boolean;
 }
 
@@ -58,6 +59,5 @@ export interface ISysUserProfile {
     title?: string;
     first_name?: string;
     last_name?: string;
-    email?: string;
     user_id?: number;
 }

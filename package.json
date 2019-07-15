@@ -17,7 +17,7 @@
         "serve": "node dist/server.js",
         "watch-node": "nodemon dist/server.js",
         "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
-        "test": "jest --detectOpenHandles --verbose",
+        "test": "yarn mkdatabase .env.test && jest --detectOpenHandles --verbose",
         "watch-test": "npm run test -- --watchAll",
         "build-ts": "tsc",
         "watch-ts": "tsc -w",
@@ -25,13 +25,14 @@
         "tslint-fix": "tslint --fix -c tslint.json -p tsconfig.json",
         "debug": "npm run build && npm run watch-debug",
         "serve-debug": "nodemon --inspect dist/server.js",
-        "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\""
+        "watch-debug": "yarn build && concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\""
     },
     "dependencies": {
-        "@blendsdk/express": "^0.9.9",
+        "@blendsdk/express": "^0.9.11",
         "@blendsdk/stdlib": "^1.0.5",
+        "@types/bcryptjs": "^2.4.2",
         "axios": "^0.19.0",
-        "bcrypt-nodejs": "^0.0.3",
+        "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
         "chalk": "^2.4.2",
         "compression": "^1.7.4",
@@ -53,7 +54,6 @@
     "devDependencies": {
         "@blendsdk/schemakit": "^0.9.2",
         "@blendsdk/sqlkit": "^0.9.5",
-        "@types/bcrypt-nodejs": "^0.0.30",
         "@types/body-parser": "^1.17.0",
         "@types/compression": "^0.0.36",
         "@types/cors": "^2.8.5",
