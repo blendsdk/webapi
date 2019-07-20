@@ -1,6 +1,6 @@
 import "./lib";
 import { validateUser } from "../services/accounts";
-import { addUser } from "../database/account";
+import { addUser, findRolesByRoleName } from "../database/account";
 
 test("validateUser (valid)", async () => {
 	const result1 = await validateUser("user1", "secret");
@@ -21,23 +21,9 @@ test("addUser", async () => {
 	expect(user.password).not.toEqual("secret");
 });
 
-
-// test("addUser & deleteUserByUserID & validateUser", async () => {
-
-// 	const user = await addUser({
-// 		username: "user1",
-// 		password: "password1",
-// 		email: "user@example.com"
-// 	});
-// 	expect(user.user_id).not.toBeNull();
-
-// 	const userVal = await validateUser("user1", "password11");
-// 	expect(isInstanceOf(userVal, Error)).toBe(true);
-
-// 	const userVal2 = await validateUser("user1", "password1");
-// 	expect(isInstanceOf(userVal2, Error)).toBe(false);
-
-
-// 	const delUser = await deleteUserByUserID({ user_id: user.user_id });
-// 	expect(delUser).not.toBeNull();
-// });
+test("getRoles", async () => {
+	const roles = await findRolesByRoleName({
+		role: ["role1", "role3", "role9"]
+	});
+	expect(roles.length).toEqual(2);
+});
