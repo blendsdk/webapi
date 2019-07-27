@@ -10,6 +10,7 @@
     "author": "",
     "license": "UNLICENSED",
     "scripts": {
+        "seed_test": "node ./dist/tests/seed.js",
         "mkdatabase": "rm -fR ./schema/dist && tsc -p ./schema && node ./schema/dist/build.js",
         "seed": "rm -fR ./schema/dist && tsc -p ./schema && node ./schema/dist/seed.js",
         "start": "npm run serve",
@@ -17,7 +18,7 @@
         "serve": "node dist/server.js",
         "watch-node": "nodemon dist/server.js",
         "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
-        "test": "yarn mkdatabase .env.test && jest --detectOpenHandles --verbose",
+        "test": "yarn mkdatabase .env.test && yarn seed_test .env.test && jest --detectOpenHandles --verbose",
         "watch-test": "npm run test -- --watchAll",
         "build-ts": "tsc",
         "watch-ts": "tsc -w",
