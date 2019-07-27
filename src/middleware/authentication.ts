@@ -119,12 +119,13 @@ export function has_role(role: string | string[]): RequestHandler {
     const builder = (roles: string[]): RequestHandler => {
         return (req: Request, res: Response, next: NextFunction) => {
             const user: IAuthenticatedUser = authenticatedUser<IAuthenticatedUser>(req);
+            debugger;
             if (user) {
                 if (isArray(user.roles)) {
                     let check = false;
                     roles.forEach((r: string) => {
-                        user.roles.forEach((i: any) => {
-                            if (i.title === r || i.title === "ADMIN") {
+                        user.roles.forEach((i: string) => {
+                            if (i === r || i === "ADMIN") {
                                 check = true;
                             }
                         });
