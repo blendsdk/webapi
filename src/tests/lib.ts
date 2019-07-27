@@ -21,7 +21,7 @@ const load_vars = (id: string) => {
 };
 
 
-const login = async (username: string, password: string): Promise<boolean> => {
+const api_login = async (username: string, password: string): Promise<boolean> => {
 	return new Promise((resolve, reject) => {
 		axios.post("http://127.0.0.1:3000/api/login", {
 			username: username,
@@ -32,54 +32,55 @@ const login = async (username: string, password: string): Promise<boolean> => {
 				resolve(true);
 			})
 			.catch((error) => {
-				console.log(JSON.stringify(error.response.data, null, 4));
+				console.log(JSON.stringify(error.response ? error.response.data : error, null, 4));
 				reject(error.response.data);
 			});
 	});
 };
 
-const api_call = (method: string, api: string, data: any, callback: Function) => {
-	if (token) {
-		axios.defaults.headers.common["Authorization"] =
-			"Bearer " + token;
-	}
-	last_api = `http://127.0.0.1:3000/api${api}`;
-	last_data = method === "get" ? api : data || {};
-	axios({
-		method: method as any,
-		url: last_api as any,
-		data: last_data as any
-	})
-		.then((res) => {
-			if (callback) {
-				callback(res.data);
-			}
+function api_call<ReturnType>(method: string, api: string, data: any): Promise<ReturnType> {
+	return new Promise((resolve, reject) => {
+		if (token) {
+			axios.defaults.headers.common["Authorization"] =
+				"Bearer " + token;
+		}
+		last_api = `http://127.0.0.1:3000/api${api}`;
+		last_data = method === "get" ? api : data || {};
+		axios({
+			method: method as any,
+			url: last_api as any,
+			data: last_data as any
 		})
-		.catch((error) => {
-			console.log(error.response.data);
-			throw new Error(error.response.data);
-		});
-};
+			.then((res) => {
+				resolve(res.data);
+			})
+			.catch((error) => {
+				const err = { request: data, err: error.response ? error.response.data : error };
+				fail(JSON.stringify(err, null, 4));
+				reject(err);
+			});
+	});
+}
 
-const POST = (api: string, data: any, callback: Function) => {
-	api_call("post", api, data, callback);
-};
+function POST<ReturnType>(api: string, data: any): Promise<ReturnType> {
+	return api_call<ReturnType>("post", api, data);
+}
 
-const GET = (api: string, data: any, callback: Function) => {
-	api_call("get", api, data, callback);
-};
+function GET<ReturnType>(api: string, data: any): Promise<ReturnType> {
+	return api_call<ReturnType>("get", api, data);
+}
 
-const PUT = (api: string, data: any, callback: Function) => {
-	api_call("put", api, data, callback);
-};
+function PUT<ReturnType>(api: string, data: any): Promise<ReturnType> {
+	return api_call<ReturnType>("put", api, data);
+}
 
-const PATCH = (api: string, data: any, callback: Function) => {
-	api_call("patch", api, data, callback);
-};
+function PATCH<ReturnType>(api: string, data: any): Promise<ReturnType> {
+	return api_call<ReturnType>("patch", api, data);
+}
 
-const DELETE = (api: string, data: any, callback: Function) => {
-	api_call("delete", api, data, callback);
-};
+function DELETE<ReturnType>(api: string, data: any): Promise<ReturnType> {
+	return api_call<ReturnType>("delete", api, data);
+}
 
 afterAll(async () => {
 	await closeConnection();
@@ -87,7 +88,6 @@ afterAll(async () => {
 
 beforeAll(async () => {
 	const conn = createConnection();
-	await conn.query(fs.readFileSync(path.join(process.cwd(), "src", "tests", "seed.sql")).toString());
 });
 
 export {
@@ -96,7 +96,7 @@ export {
 	PUT,
 	PATCH,
 	DELETE,
-	login,
+	api_login,
 	save_vars,
 	load_vars
 };
