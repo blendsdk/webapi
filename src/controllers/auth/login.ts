@@ -27,17 +27,17 @@ export interface IJwtTokenResult {
 async function handler(req: Request, res: Response) {
     const { username, password } = req.body;
     try {
-        const user = await validateUser(username, password);
-        if (!isInstanceOf(user, Error)) {
+        const vUser = await validateUser(username, password);
+        if (!vUser.error) {
             return response(res).OK<IJwtTokenResult>({
                 success: true,
                 token: createJWToken({
-                    sessionData: user,
+                    sessionData: vUser.user,
                     maxAge: (process.env.JWT_MAX_AGE as any) || 2592000
                 })
             });
         } else {
-            return response(res).unAuthorized(t((user as Error).message));
+            return response(res).unAuthorized(t(vUser.error.message));
         }
     } catch (err) {
         return response(res).serverError(err);
