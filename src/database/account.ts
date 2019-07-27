@@ -1,6 +1,6 @@
 
 import { sql_query, sql_insert, IDynamicQuery } from "@blendsdk/sqlkit";
-import { ISysUser, ISysRole } from "./dbtypes";
+import { ISysUser, ISysRole, ISysUserRole } from "./dbtypes";
 import bcrypt from "bcryptjs";
 import { wrapInArray } from "@blendsdk/stdlib";
 
@@ -24,12 +24,19 @@ export const deleteUserByUserID = sql_query<ISysUser, IDeleteUserByUserID>(
 /**
  * Adds a sys.user record
  */
-export const addUser = sql_insert<ISysUser, ISysUser>("sys.user", {
+export const createUser = sql_insert<ISysUser, ISysUser>("sys.user", {
     inConverter: (record: ISysUser) => {
         const salt = bcrypt.genSaltSync(12);
         record.password = bcrypt.hashSync(record.password, salt);
         return record;
     }
+});
+
+/**
+ * Create a UserRoleRecord
+ */
+export const createUserRole = sql_insert<ISysUserRole, ISysUserRole>("sys.user_role", {
+    single: true
 });
 
 /**
@@ -91,7 +98,7 @@ export const getUserRolesByUserID = sql_query<ISysRole[], IGetUserRolesByUserID>
  * @interface IFindRolesByRoleName
  */
 export interface IFindRolesByRoleName {
-    role: string | string[];
+    roles: string | string[];
 }
 
 /**
@@ -99,7 +106,7 @@ export interface IFindRolesByRoleName {
  */
 export const findRolesByRoleName = sql_query<ISysRole[], IFindRolesByRoleName>(
     (params: IFindRolesByRoleName): IDynamicQuery => {
-        const role = wrapInArray(params.role);
+        const role = wrapInArray(params.roles);
         return {
             named: false,
             sql: `select * from sys.role where role_name in (${role.map((a, i) => { return "$" + (i + 1); }).join(",")})`,

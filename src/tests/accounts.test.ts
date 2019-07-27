@@ -1,6 +1,6 @@
 import "./lib";
-import { validateUser } from "../services/accounts";
-import { addUser, findRolesByRoleName } from "../database/account";
+import { validateUser, addUser, assignRolesToUser } from "../services/accounts";
+import { createUser, findRolesByRoleName } from "../database/account";
 
 test("validateUser (valid)", async () => {
 	const result1 = await validateUser("user1", "secret");
@@ -12,8 +12,8 @@ test("validateUser (invalid)", async () => {
 	expect(result2.error).not.toBeNull();
 });
 
-test("addUser", async () => {
-	const user = await addUser({
+test("createUser (DB)", async () => {
+	const user = await createUser({
 		username: "user2",
 		password: "secret",
 		email: "user2@example.com"
@@ -21,9 +21,30 @@ test("addUser", async () => {
 	expect(user.password).not.toEqual("secret");
 });
 
+test("addUser (service)", async () => {
+	const user = await addUser({
+		username: "user3",
+		password: "secret",
+		email: "user3@example.com"
+	});
+	expect(user.password).not.toEqual("secret");
+});
+
 test("getRoles", async () => {
 	const roles = await findRolesByRoleName({
-		role: ["role1", "role3", "role9"]
+		roles: ["role1", "role3", "role9"]
 	});
 	expect(roles.length).toEqual(2);
+});
+
+test("assignRolesToUser", async () => {
+	const user = await addUser({
+		username: "user4",
+		password: "secret",
+		email: "user4@example.com"
+	});
+	const result = await assignRolesToUser(user.user_id, ["role1", "role2", "role4"]);
+	const vUser = await validateUser("user4", "secret");
+	expect(result).toEqual(true);
+	expect(vUser.user.roles.length).toEqual(3);
 });
