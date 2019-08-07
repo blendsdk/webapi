@@ -119,7 +119,6 @@ export function has_role(role: string | string[]): RequestHandler {
     const builder = (roles: string[]): RequestHandler => {
         return (req: Request, res: Response, next: NextFunction) => {
             const user: IAuthenticatedUser = authenticatedUser<IAuthenticatedUser>(req);
-            debugger;
             if (user) {
                 if (isArray(user.roles)) {
                     let check = false;
