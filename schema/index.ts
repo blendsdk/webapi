@@ -24,7 +24,6 @@ sys_user_role.primaryKeyColumn("user_role_id")
 sys_profile
     .primaryKeyColumn("user_profile_id")
     .stringColumn("gender", { required: false })
-    .stringColumn("title", { required: false })
     .stringColumn("first_name")
     .stringColumn("last_name")
     .stringColumn("email", { unique: true })
