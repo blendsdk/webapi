@@ -131,15 +131,15 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@blendsdk/express@^0.9.11":
+"@blendsdk/express@../express":
   version "0.9.11"
-  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-0.9.11.tgz#9618ed4337cc53a46f9c43a72a1d45882c157aa7"
-  integrity sha512-J8teFHA0/ljUSVcMVUhsbmJgecZ6Xgj7i47xLl9juQIm8Bm2Dm3zer2BVyOptkJi+31WZacUiZtkiJpCdCyQ9Q==
   dependencies:
     "@blendsdk/stdlib" "^1.0.5"
+    "@types/jsonwebtoken" "^8.3.3"
     "@types/node" "^12.6.1"
     express "^4.17.1"
     express-validator "^6.1.1"
+    jsonwebtoken "^8.5.1"
     tslib "^1.10.0"
     typescript "^3.5.2"
     winston "^3.2.1"
@@ -479,6 +479,13 @@
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.3.2.tgz#e3d5245197152346fae7ee87d5541aa5a92d0362"
   integrity sha512-Mkjljd9DTpkPlrmGfTJvcP4aBU7yO2QmW7wNVhV4/6AEUxYoacqU7FJU/N0yFEHTsIrE4da3rUrjrR5ejicFmA==
+  dependencies:
+    "@types/node" "*"
+
+"@types/jsonwebtoken@^8.3.3":
+  version "8.3.3"
+  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.3.3.tgz#eafeea8239c74b02263d204c0e1175d5cd0bb85f"
+  integrity sha512-mofwpvFbm2AUxD5mg4iQPc2o/+ubM200R/L86kR17SeC99jM3gEnB9hy16ln3kZkxM5LnGpDJclxeUNEHhehng==
   dependencies:
     "@types/node" "*"
 

@@ -1,5 +1,5 @@
 /**
- * Interface describing a sys.config record.
+ * Interface describing a sys_config record.
  *
  * @interface ISysConfig
  * @export
@@ -11,7 +11,7 @@ export interface ISysConfig {
 }
 
 /**
- * Interface describing a sys.user record.
+ * Interface describing a sys_user record.
  *
  * @interface ISysUser
  * @export
@@ -25,7 +25,7 @@ export interface ISysUser {
 }
 
 /**
- * Interface describing a sys.role record.
+ * Interface describing a sys_role record.
  *
  * @interface ISysRole
  * @export
@@ -36,7 +36,7 @@ export interface ISysRole {
 }
 
 /**
- * Interface describing a sys.user_role record.
+ * Interface describing a sys_user_role record.
  *
  * @interface ISysUserRole
  * @export
@@ -48,7 +48,7 @@ export interface ISysUserRole {
 }
 
 /**
- * Interface describing a sys.user_profile record.
+ * Interface describing a sys_user_profile record.
  *
  * @interface ISysUserProfile
  * @export

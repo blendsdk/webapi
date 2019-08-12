@@ -1,21 +1,7 @@
 import { Request, Response } from "express";
-import { createJWToken } from "../../middleware/authentication";
-import { response, withRequestValidation } from "@blendsdk/express";
-import { check } from "express-validator";
-import { validateUser } from "../../services/accounts";
+import { response, createJWToken, IJwtTokenResult } from "@blendsdk/express";
 import { t } from "../../i18n";
-import { isInstanceOf } from "@blendsdk/stdlib";
-
-/**
- * Interface for returning the token to the requester
- *
- * @export
- * @interface IJwtTokenResult
- */
-export interface IJwtTokenResult {
-    success: true;
-    token: string;
-}
+import { validateUser } from "../../services/authentication";
 
 /**
  * Validates the user and provides a JWT authentication token.
@@ -24,7 +10,7 @@ export interface IJwtTokenResult {
  * @param {Response} res
  * @returns
  */
-async function handler(req: Request, res: Response) {
+export async function loginController(req: Request, res: Response) {
     const { username, password } = req.body;
     try {
         const vUser = await validateUser(username, password);
@@ -43,11 +29,3 @@ async function handler(req: Request, res: Response) {
         return response(res).serverError(err);
     }
 }
-
-const loginController = [
-    check("username").isString(),
-    check("password").isString(),
-    withRequestValidation(handler)
-];
-
-export { loginController };

@@ -15,16 +15,16 @@ export interface IDeleteUserByUserID {
 }
 
 export const deleteUserByUserID = sql_query<ISysUser, IDeleteUserByUserID>(
-    `delete from sys.user where user_id = :user_id returning *`
+    `delete from sys_user where user_id = :user_id returning *`
     ,
     { single: true }
 );
 
 
 /**
- * Adds a sys.user record
+ * Adds a sys_user record
  */
-export const createUser = sql_insert<ISysUser, ISysUser>("sys.user", {
+export const createUser = sql_insert<ISysUser, ISysUser>("sys_user", {
     inConverter: (record: ISysUser) => {
         const salt = bcrypt.genSaltSync(12);
         record.password = bcrypt.hashSync(record.password, salt);
@@ -35,7 +35,7 @@ export const createUser = sql_insert<ISysUser, ISysUser>("sys.user", {
 /**
  * Create a UserRoleRecord
  */
-export const createUserRole = sql_insert<ISysUserRole, ISysUserRole>("sys.user_role", {
+export const createUserRole = sql_insert<ISysUserRole, ISysUserRole>("sys_user_role", {
     single: true
 });
 
@@ -57,7 +57,7 @@ export const findUserByUsernameOrEmail = sql_query<ISysUser, IFindUserByUsername
         select
             *
         from
-            sys.user
+            sys_user
         where
             lower(username) = lower(:username) OR
             lower(email) = lower(:username)
@@ -84,8 +84,8 @@ export const getUserRolesByUserID = sql_query<ISysRole[], IGetUserRolesByUserID>
         select
             r.*
         from
-            sys.role r
-            inner join sys.user_role ur on r.role_id = ur.role_id
+            sys_role r
+            inner join sys_user_role ur on r.role_id = ur.role_id
         where
             ur.user_id = :user_id
     `
@@ -109,7 +109,7 @@ export const findRolesByRoleName = sql_query<ISysRole[], IFindRolesByRoleName>(
         const role = wrapInArray(params.roles);
         return {
             named: false,
-            sql: `select * from sys.role where role_name in (${role.map((a, i) => { return "$" + (i + 1); }).join(",")})`,
+            sql: `select * from sys_role where role_name in (${role.map((a, i) => { return "$" + (i + 1); }).join(",")})`,
             parameters: role
         };
     }
