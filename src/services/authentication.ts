@@ -44,7 +44,7 @@ export function validateUser(username: string, password: string): Promise<IValid
             } else {
                 resolve({
                     user: null,
-                    error: new Error(t("Invalid username or password!!"))
+                    error: new Error(t("Invalid username or password!"))
                 });
             }
         } catch (err) {
