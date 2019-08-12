@@ -49,3 +49,9 @@ test("assign roles to user", async () => {
     const vUser = await validateUser("user2", "secret");
     expect(vUser.user.roles).toEqual(["role1", "role3"]);
 });
+
+test("assign non-existing roles", async () => {
+    await expect(assignRolesToUser(1, ["roleX", "roleY"])).rejects.toEqual(
+        "None of the provided roles could be assigned to this user!"
+    );
+});
