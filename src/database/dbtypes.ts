@@ -5,9 +5,22 @@
  * @export
  */
 export interface ISysConfig {
-    config_id?: number;
-    config?: string;
-    value?: string;
+	config_id?: number;
+	config?: string;
+	value?: string;
+}
+
+/**
+ * Interface describing a sys_i18n record.
+ *
+ * @interface ISysI18n
+ * @export
+ */
+export interface ISysI18n {
+	id?: number;
+	locale?: string;
+	key?: string;
+	value?: string;
 }
 
 /**
@@ -17,11 +30,11 @@ export interface ISysConfig {
  * @export
  */
 export interface ISysUser {
-    user_id?: number;
-    username?: string;
-    password?: string;
-    email?: string;
-    is_active?: boolean;
+	user_id?: number;
+	username?: string;
+	password?: string;
+	email?: string;
+	is_active?: boolean;
 }
 
 /**
@@ -31,8 +44,8 @@ export interface ISysUser {
  * @export
  */
 export interface ISysRole {
-    role_id?: number;
-    role_name?: string;
+	role_id?: number;
+	role_name?: string;
 }
 
 /**
@@ -42,9 +55,9 @@ export interface ISysRole {
  * @export
  */
 export interface ISysUserRole {
-    user_role_id?: number;
-    user_id?: number;
-    role_id?: number;
+	user_role_id?: number;
+	user_id?: number;
+	role_id?: number;
 }
 
 /**
@@ -54,10 +67,10 @@ export interface ISysUserRole {
  * @export
  */
 export interface ISysUserProfile {
-    user_profile_id?: number;
-    gender?: string;
-    title?: string;
-    first_name?: string;
-    last_name?: string;
-    user_id?: number;
+	user_profile_id?: number;
+	gender?: string;
+	title?: string;
+	first_name?: string;
+	last_name?: string;
+	user_id?: number;
 }

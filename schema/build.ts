@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import * as path from "path";
-import { createTypes } from "@blendsdk/schemakit";
 import { asyncForEach } from "@blendsdk/stdlib";
+import { createTypes, generateInterface, generateDataAccessLayerAPI } from "@blendsdk/codekit";
 import dotenv from "dotenv";
 import { createConnection, closeConnection } from "@blendsdk/sqlkit";
 import { database } from "./database";
@@ -11,7 +11,16 @@ dotenv.config({ path: envFile });
 console.log(chalk.green(`Using the ${envFile}`));
 
 console.log(chalk.green("Creating DB Types"));
-createTypes(path.join(process.cwd(), "dbtypes.ts"), database.getTables());
+createTypes(path.join(process.cwd(), "src", "database", "dbtypes.ts"), database.getTables());
+console.log(chalk.green("Creating DB CRUD"));
+generateDataAccessLayerAPI(database.getTables(), {
+    outDir: "./src/database",
+    tables: {
+        sys_user: {
+            insert: false
+        }
+    }
+});
 
 const connection = createConnection();
 

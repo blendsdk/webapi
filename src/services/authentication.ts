@@ -1,8 +1,9 @@
-import { findUserByUsernameOrEmail, getUserRolesByUserID } from "../database/account";
 import { ISysRole } from "../database/dbtypes";
 import bcrypt from "bcryptjs";
 import { t } from "../i18n";
 import { IAuthenticatedUser } from "../common/types";
+import { findUserByUsernameOrEmail } from "../database/sys_user";
+import { getUserRolesByUserID } from "../database/sys_role";
 
 /**
  * Interface describing a validates user
