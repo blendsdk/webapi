@@ -131,10 +131,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blendsdk/codekit@^0.9.5":
-  version "0.9.5"
-  resolved "https://registry.yarnpkg.com/@blendsdk/codekit/-/codekit-0.9.5.tgz#5487cd001435155c8a9a081e52ae2815e133db3d"
-  integrity sha512-VrIr+MN+uXggGE+5/28LlGUZA+1iJ0MgzVvYtp+Q3gCF7OUUMrKqjZC4dKos0p7ihi93XNu/Xk/6wseb8D7t2Q==
+"@blendsdk/codekit@^0.9.6":
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/@blendsdk/codekit/-/codekit-0.9.6.tgz#2fc17d077a4b0f4d563987cef30d1d133c6912a6"
+  integrity sha512-0ZSUhEjItmBA0HIX05AaWPAmqEiXY6gzIyArKuLRDNxQ1AzVFmYVi8TzpiQp50xN9Rlikzs23OB9gfOTZunclg==
   dependencies:
     "@blendsdk/schemakit" "^0.9.6"
     "@blendsdk/stdlib" "^1.0.6"

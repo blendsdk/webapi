@@ -4,3 +4,31 @@
  */
 import { ISysUser } from "../dbtypes";
 import { sql_insert, sql_query, sql_update, sql_delete } from "@blendsdk/sqlkit";
+/**
+ * Interface describing a updateSysUserByUserId record.
+ *
+ * @interface IUpdateSysUserByUserId
+ * @export
+ */
+export interface IUpdateSysUserByUserId {
+	user_id?: number;
+}
+
+/**
+ * Updates a record from the sys_user relation
+ */
+export const updateSysUserByUserId = sql_update<ISysUser, ISysUser, IUpdateSysUserByUserId>("sys_user", { single: true } );
+/**
+ * Interface describing a deleteSysUserByUserId record.
+ *
+ * @interface IDeleteSysUserByUserId
+ * @export
+ */
+export interface IDeleteSysUserByUserId {
+	user_id?: number;
+}
+
+/**
+ * Deletes a record from the sys_user relation
+ */
+export const deleteSysUserByUserId = sql_delete<ISysUser, IDeleteSysUserByUserId>("sys_user", { single: true } );

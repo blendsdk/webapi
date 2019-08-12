@@ -17,7 +17,7 @@
         "serve": "node dist/server.js",
         "watch-node": "nodemon dist/server.js",
         "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
-        "test": "yarn mkdatabase .env.test && yarn seed_test .env.test && jest --detectOpenHandles --verbose",
+        "test": "jest --detectOpenHandles --verbose --runInBand",
         "watch-test": "npm run test -- --watchAll",
         "build-ts": "tsc",
         "watch-ts": "tsc -w",
@@ -28,7 +28,7 @@
         "watch-debug": "yarn build && concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\""
     },
     "dependencies": {
-        "@blendsdk/codekit": "^0.9.5",
+        "@blendsdk/codekit": "^0.9.6",
         "@blendsdk/express": "^0.9.17",
         "@blendsdk/schemakit": "^0.9.6",
         "@blendsdk/sqlkit": "^0.9.7",

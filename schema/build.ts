@@ -17,6 +17,7 @@ generateDataAccessLayerAPI(database.getTables(), {
     outDir: "./src/database",
     tables: {
         sys_user: {
+            select: false,
             insert: false
         }
     }
