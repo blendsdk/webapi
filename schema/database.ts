@@ -1,14 +1,21 @@
-import { PostgreSQLDatabase, createTypes } from "@blendsdk/schemakit";
-import * as path from "path";
+import { PostgreSQLDatabase } from "@blendsdk/schemakit";
 
-const databaseSchema = new PostgreSQLDatabase();
+const database = new PostgreSQLDatabase();
 
 //// SYSTEM Tables
-const sys_config = databaseSchema.addTable("sys_config"),
-    sys_user = databaseSchema.addTable("sys_user"),
-    sys_role = databaseSchema.addTable("sys_role"),
-    sys_user_role = databaseSchema.addTable("sys_user_role"),
-    sys_profile = databaseSchema.addTable("sys_user_profile");
+const sys_config = database.addTable("sys_config"),
+    sys_i18n = database.addTable("sys_i18n"),
+    sys_user = database.addTable("sys_user"),
+    sys_role = database.addTable("sys_role"),
+    sys_user_role = database.addTable("sys_user_role"),
+    sys_profile = database.addTable("sys_user_profile");
+
+sys_i18n
+    .primaryKeyColumn("id")
+    .stringColumn("locale")
+    .stringColumn("key")
+    .stringColumn("value", { required: false })
+    .uniqueConstraint(["locale", "key"]);
 
 sys_config
     .primaryKeyColumn("config_id")
@@ -37,4 +44,4 @@ sys_profile
     .stringColumn("last_name")
     .referenceColumn("user_id", sys_user);
 
-export { databaseSchema };
+export { database };

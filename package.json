@@ -12,7 +12,6 @@
     "scripts": {
         "seed_test": "node ./dist/tests/seed.js",
         "mkdatabase": "rm -fR ./schema/dist && tsc -p ./schema && node ./schema/dist/build.js",
-        "seed": "rm -fR ./schema/dist && tsc -p ./schema && node ./schema/dist/seed.js",
         "start": "npm run serve",
         "build": "npm run build-ts && npm run tslint",
         "serve": "node dist/server.js",

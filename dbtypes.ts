@@ -11,6 +11,19 @@ export interface ISysConfig {
 }
 
 /**
+ * Interface describing a sys_i18n record.
+ *
+ * @interface ISysI18n
+ * @export
+ */
+export interface ISysI18n {
+    id?: number;
+    locale?: string;
+    key?: string;
+    value?: string;
+}
+
+/**
  * Interface describing a sys_user record.
  *
  * @interface ISysUser

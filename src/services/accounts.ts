@@ -1,17 +1,6 @@
-import { createUser, findRolesByRoleName, createUserRole } from "../database/account";
-import { ISysRole, ISysUser } from "../database/dbtypes";
+import { findRolesByRoleName, createUserRole } from "../database/account";
+import { ISysRole } from "../database/dbtypes";
 import { asyncForEach } from "@blendsdk/stdlib";
-
-/**
- * Adds a new user.
- *
- * @export
- * @param {ISysUser} user
- * @returns {Promise<ISysUser>}
- */
-export function addUser(user: ISysUser): Promise<ISysUser> {
-    return createUser(user);
-}
 
 /**
  * Assigns one or more roles to a user
