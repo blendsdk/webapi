@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import * as path from "path";
 import { asyncForEach } from "@blendsdk/stdlib";
-import { createTypes, generateInterface, generateDataAccessLayerAPI } from "@blendsdk/codekit";
+import { createTypes, generateDataAccessLayerAPI } from "@blendsdk/codekit";
 import dotenv from "dotenv";
 import { createConnection, closeConnection } from "@blendsdk/sqlkit";
 import { database } from "./database";
