@@ -1,4 +1,4 @@
-import { IRoute, response, buildRoutes } from "@blendsdk/express";
+import { IRoute } from "@blendsdk/express";
 import { loginController } from "./controllers/authentication/loginController";
 
 const routes: IRoute[] = [
