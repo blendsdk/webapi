@@ -10,5 +10,9 @@ export const insertIntoSysUser = sql_insert<ISysUser, ISysUser>("sys_user", {
         const salt = bcrypt.genSaltSync(12);
         record.password = bcrypt.hashSync(record.password, salt);
         return record;
+    },
+    outConverter: record => {
+        record.password = undefined;
+        return record;
     }
 });
