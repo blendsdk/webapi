@@ -1,24 +1,35 @@
 import chalk from "chalk";
 import * as path from "path";
-import { schema } from "./schema"
-import { createTypes } from "@blendsdk/schemakit";
 import { asyncForEach } from "@blendsdk/stdlib";
+import { createTypes, generateInterface, generateDataAccessLayerAPI } from "@blendsdk/codekit";
 import dotenv from "dotenv";
 import { createConnection, closeConnection } from "@blendsdk/sqlkit";
+import { database } from "./database";
 
-dotenv.config({ path: ".env" });
+const envFile = process.argv[2] || ".env";
+dotenv.config({ path: envFile });
+console.log(chalk.green(`Using the ${envFile}`));
 
 console.log(chalk.green("Creating DB Types"));
-createTypes(path.join(process.cwd(), 'dbtypes.ts'), schema.getTables());
+createTypes(path.join(process.cwd(), "src", "database", "dbtypes.ts"), database.getTables());
+console.log(chalk.green("Creating DB CRUD"));
+generateDataAccessLayerAPI(database.getTables(), {
+    outDir: "./src/database",
+    tables: {
+        sys_user: {
+            insert: false
+        }
+    }
+});
 
 const connection = createConnection();
 
 (async () => {
     console.log(chalk.green("Creating DB Tables"));
-    const sql = schema.create();
-    await asyncForEach(sql, async (stmt) => {
+    const sql = database.create();
+    await asyncForEach(sql, async stmt => {
         await connection.query(stmt);
-        process.stdout.write('.');
+        process.stdout.write(".");
     });
     console.log();
     await closeConnection();

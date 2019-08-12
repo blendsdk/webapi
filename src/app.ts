@@ -7,7 +7,8 @@ import path from "path";
 import bearerToken from "express-bearer-token";
 import cors from "cors";
 import { logger } from "./logger";
-import { defineRoutes } from "./routes";
+import { buildRoutes } from "@blendsdk/express";
+import { routes } from "./routes";
 
 // Load environment variables from .env file, where API keys and passwords are configured
 dotenv.config({ path: ".env" });
@@ -27,9 +28,7 @@ app.use(lusca.xssProtection(true));
 app.use(bearerToken());
 app.use(cors({ origin: "*" }));
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
-
-defineRoutes(app);
-
+buildRoutes(app, routes);
 logger.info(`Application initialized at ${new Date()}`);
 
 export default app;
