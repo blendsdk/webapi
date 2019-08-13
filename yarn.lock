@@ -143,10 +143,10 @@
     mkdirp "^0.5.1"
     tslib "^1.10.0"
 
-"@blendsdk/express@^0.9.17":
-  version "0.9.17"
-  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-0.9.17.tgz#9e38bd721bd30bf3397a1884d29136ad91b5c666"
-  integrity sha512-Px1Fzr1W1DiW/cSSzaV8vxgpfa7/NovAkt2nC7Bhki/zsoY9NC3os/NnGEuK/B+S6oR8BWfdefoG+4R4yC8ckw==
+"@blendsdk/express@^0.9.18":
+  version "0.9.18"
+  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-0.9.18.tgz#8c2ce863f4c439d153e8aa7ba25ea3dffbcc2984"
+  integrity sha512-zsw3ajZbeONAq6IPZxHyPmOdPk9AxeCuefKb7awaKjFCHYGDo0w4I/QlSZYLPpKpyBWBiWaxqsCNJSeerjJWHw==
   dependencies:
     "@blendsdk/stdlib" "^1.0.5"
     "@types/jsonwebtoken" "^8.3.3"
