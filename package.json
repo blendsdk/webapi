@@ -11,6 +11,7 @@
     "license": "UNLICENSED",
     "scripts": {
         "seed_test": "node ./dist/src/tests/seed.js",
+        "mkclient": "node ./dist/src/client/index.js",
         "mkdatabase": "rm -fR ./schema/dist && tsc -p ./schema && node ./schema/dist/build.js && yarn tslint-fix",
         "start": "npm run serve",
         "build": "npm run build-ts && npm run tslint",
@@ -28,7 +29,7 @@
         "watch-debug": "yarn build && concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\""
     },
     "dependencies": {
-        "@blendsdk/codekit": "^0.9.6",
+        "@blendsdk/codekit": "../codekit",
         "@blendsdk/express": "^0.9.18",
         "@blendsdk/schemakit": "^0.9.6",
         "@blendsdk/sqlkit": "^0.9.7",

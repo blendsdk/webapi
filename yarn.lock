@@ -131,10 +131,8 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blendsdk/codekit@^0.9.6":
+"@blendsdk/codekit@../codekit":
   version "0.9.6"
-  resolved "https://registry.yarnpkg.com/@blendsdk/codekit/-/codekit-0.9.6.tgz#2fc17d077a4b0f4d563987cef30d1d133c6912a6"
-  integrity sha512-0ZSUhEjItmBA0HIX05AaWPAmqEiXY6gzIyArKuLRDNxQ1AzVFmYVi8TzpiQp50xN9Rlikzs23OB9gfOTZunclg==
   dependencies:
     "@blendsdk/schemakit" "^0.9.6"
     "@blendsdk/stdlib" "^1.0.6"
