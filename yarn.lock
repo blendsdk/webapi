@@ -132,9 +132,9 @@
     to-fast-properties "^2.0.0"
 
 "@blendsdk/codekit@^0.9.7":
-  version "0.9.8"
-  resolved "https://registry.yarnpkg.com/@blendsdk/codekit/-/codekit-0.9.8.tgz#27643503b3ff0b603b451a3b3b43195128d2ac31"
-  integrity sha512-gdJjSbi+cVWRKNIDy2xSUmWlRVd3kLqlV8DDaefpLSTcNTJls4OuqYvK67mxOdA7KlIwLLbOq1R7mH9bgkKIkw==
+  version "0.9.11"
+  resolved "https://registry.yarnpkg.com/@blendsdk/codekit/-/codekit-0.9.11.tgz#6cff9701abaf840b3965033b2c20776d44854305"
+  integrity sha512-vZNaJHYeb0gP3aPnKNpTyl1NGfm7Mqi63mCr3OiPibwltn3hVWyKzQ4UFiDhLQYu7m31bRucj2NoxB+2eJiXWg==
   dependencies:
     "@blendsdk/schemakit" "^0.9.6"
     "@blendsdk/stdlib" "^1.0.6"
@@ -146,9 +146,9 @@
     tslib "^1.10.0"
 
 "@blendsdk/express@^0.9.18":
-  version "0.9.18"
-  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-0.9.18.tgz#8c2ce863f4c439d153e8aa7ba25ea3dffbcc2984"
-  integrity sha512-zsw3ajZbeONAq6IPZxHyPmOdPk9AxeCuefKb7awaKjFCHYGDo0w4I/QlSZYLPpKpyBWBiWaxqsCNJSeerjJWHw==
+  version "0.9.20"
+  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-0.9.20.tgz#758826279aadd573631f5080e730a80bd80a3513"
+  integrity sha512-iZKC6bs4IJQdhHZdYS/Aayq2nOIvPpgPkuVCZaP75SF5S6kG+A4YG3/v4YEUXQidp61yg3MJFjy9ip9QjORffA==
   dependencies:
     "@blendsdk/stdlib" "^1.0.5"
     "@types/jsonwebtoken" "^8.3.3"

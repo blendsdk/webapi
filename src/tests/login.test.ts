@@ -1,10 +1,6 @@
 import { app, server } from "../server";
 import request from "supertest";
 
-afterAll(() => {
-    server.close();
-});
-
 test("login endpoint test", async () => {
     const response = await request(app)
         .post("/api/login")

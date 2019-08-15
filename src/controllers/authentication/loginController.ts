@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { response, createJWToken, IJwtTokenResult } from "@blendsdk/express";
+import { response, createJWToken, IJwtTokenResult, getParameters } from "@blendsdk/express";
 import { t } from "../../i18n";
 import { validateUser } from "../../services/authentication";
-
+import { IApiAuthenticationRequest } from "../../common/api_types";
 /**
  * Validates the user and provides a JWT authentication token.
  *
@@ -11,9 +11,9 @@ import { validateUser } from "../../services/authentication";
  * @returns
  */
 export async function loginController(req: Request, res: Response) {
-    const { username, password } = req.body;
     try {
-        const vUser = await validateUser(username, password);
+        const params = getParameters<IApiAuthenticationRequest>(req);
+        const vUser = await validateUser(params.username, params.password);
         if (!vUser.error) {
             return response(res).OK<IJwtTokenResult>({
                 success: true,
