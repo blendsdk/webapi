@@ -29,7 +29,7 @@
         "watch-debug": "yarn build && concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\""
     },
     "dependencies": {
-        "@blendsdk/codekit": "../codekit",
+        "@blendsdk/codekit": "^0.9.7",
         "@blendsdk/express": "^0.9.18",
         "@blendsdk/schemakit": "^0.9.6",
         "@blendsdk/sqlkit": "^0.9.7",
