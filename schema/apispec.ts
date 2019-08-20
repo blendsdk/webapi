@@ -11,6 +11,14 @@ const authenticationResponse: IAPIComponent = {
     token: { type: "string" }
 };
 
+const greetRequest: IAPIComponent = {
+    name: { type: "string", optional: true }
+};
+
+const greetResponse: IAPIComponent = {
+    hello: { type: "string" }
+};
+
 const apiSpec: IAPISpecification = {
     application: "api",
     version: 1,
@@ -27,11 +35,26 @@ const apiSpec: IAPISpecification = {
             response: {
                 200: {}
             }
+        },
+        {
+            name: "greet",
+            method: "post",
+            absoluteUrl: true,
+            url: "/api/greet/:name?/name",
+            secure: true,
+            controller: "greetController",
+            imports: [{ name: "greetController", from: "./controllers/authentication/greetController" }],
+            request: greetRequest,
+            response: {
+                200: {}
+            }
         }
     ],
     components: {
         authenticationRequest,
-        authenticationResponse
+        authenticationResponse,
+        greetRequest,
+        greetResponse
     }
 };
 

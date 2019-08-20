@@ -27,5 +27,5 @@ test("failed login endpoint test", async () => {
     expect(error).toEqual(true);
     expect(success).toBeUndefined();
     expect(token).toBeUndefined();
-    expect(message.message).toEqual("Invalid username or password!");
+    expect(message).toEqual("Invalid username or password!");
 });
