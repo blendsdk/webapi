@@ -12,7 +12,7 @@ import { getUserRolesByUserID } from "../database/sys_role";
  * @interface IValidateUserResult
  */
 export interface IValidateUserResult {
-    error?: Error;
+    error?: any;
     user?: IAuthenticatedUser;
 }
 
@@ -44,7 +44,7 @@ export function validateUser(username: string, password: string): Promise<IValid
             } else {
                 resolve({
                     user: null,
-                    error: new Error(t("Invalid username or password!"))
+                    error: t("Invalid username or password!")
                 });
             }
         } catch (err) {

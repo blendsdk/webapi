@@ -145,10 +145,10 @@
     prettier "1.18.2"
     tslib "^1.10.0"
 
-"@blendsdk/express@^0.9.21":
-  version "0.9.21"
-  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-0.9.21.tgz#c27f08377ea6a8aa8d74af23daacd91d9c755b8a"
-  integrity sha512-Ud/+Gow++LXP4aZyT59JokT69ZJzx47AE6auQbY9GaGB2vOH8ilE21qg5lhxdqYCaVV20Zejk9KPnaoL6FU0/w==
+"@blendsdk/express@^0.9.22":
+  version "0.9.22"
+  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-0.9.22.tgz#8f5c2311b9f19697502c6b526c70d07809a22125"
+  integrity sha512-+4b27szidMTw9xCIHxmMFS1K53bjaUBZNIpK0xS4VSqs+qTM9ovsbd1UwJLNS3ttVYKywu+SWb3jQdVTIzFzYg==
   dependencies:
     "@blendsdk/stdlib" "^1.0.5"
     "@types/jsonwebtoken" "^8.3.3"

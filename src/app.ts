@@ -8,7 +8,7 @@ import bearerToken from "express-bearer-token";
 import cors from "cors";
 import { logger } from "./logger";
 import { buildRoutes, getParameters } from "@blendsdk/express";
-import { ApiRoutes } from "./routes";
+import ApiRoutes from "./routes";
 
 // Load environment variables from .env file, where API keys and passwords are configured
 dotenv.config({ path: ".env" });
@@ -29,14 +29,14 @@ app.use(bearerToken());
 app.use(cors({ origin: "*" }));
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
 app.use((req: Request, res: Response, next: NextFunction) => {
-    logger.debug(getParameters<any>(req));
+    logger.debug(["Request", getParameters<any>(req)]);
     return next();
 });
 
 buildRoutes(app, ApiRoutes);
 if (process.env.NODE_JEST) {
     logger.info("Enabling test routes");
-    buildRoutes(app, require("./tests/routes").ApiRoutes);
+    buildRoutes(app, require("./tests/routes").default);
 }
 logger.info(`Application initialized at ${new Date()}`);
 

@@ -23,7 +23,7 @@ export async function loginController(req: Request, res: Response) {
                 })
             });
         } else {
-            return response(res).unAuthorized(t(vUser.error.message));
+            return response(res).unAuthorized(t(vUser.error));
         }
     } catch (err) {
         return response(res).serverError(err);

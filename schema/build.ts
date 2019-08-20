@@ -18,7 +18,7 @@ generateInterfacesFromTables(path.join(process.cwd(), "src", "database", "dbtype
 console.log(chalk.green("Creating Routes"));
 generateRouter(apiSpec, {
     routerOutFile: "src/routes.ts",
-    typesOutFile: "src/common/api_types.ts"
+    typesOutFile: ["src/common/api_types.ts", "/Users/gevik/Workspace/github/client1/src/api_types.ts"]
 });
 generateRouter(testApiSpec, {
     routerOutFile: "src/tests/routes.ts",

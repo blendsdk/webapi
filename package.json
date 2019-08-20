@@ -30,7 +30,7 @@
     },
     "dependencies": {
         "@blendsdk/codekit": "^0.9.12",
-        "@blendsdk/express": "^0.9.21",
+        "@blendsdk/express": "^0.9.22",
         "@blendsdk/schemakit": "^0.9.6",
         "@blendsdk/sqlkit": "^0.9.7",
         "@blendsdk/stdlib": "^1.0.8",
