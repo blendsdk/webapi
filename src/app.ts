@@ -28,7 +28,7 @@ app.use(lusca.xssProtection(true));
 app.use(bearerToken());
 app.use(cors({ origin: "*" }));
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req: Request, _res: Response, next: NextFunction) => {
     logger.debug(["Request", getParameters<any>(req)]);
     return next();
 });

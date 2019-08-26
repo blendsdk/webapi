@@ -12,16 +12,14 @@ const testApiSpec: IAPISpecification = {
     version: 1,
     endpoints: [
         {
-            name: "params",
             method: "post",
             url: "/api/params/:q?",
-            absoluteUrl: true,
+            skipVersioning: true,
             secure: false,
-            request: paramsRequestResponse,
-            controller: "testController",
-            imports: [{ name: "testController", from: "./testController" }],
-            response: {
-                200: {}
+            backend: {
+                controller: { name: "testController", from: "./testController" },
+                requestType: paramsRequestResponse,
+                responseType: paramsRequestResponse
             }
         }
     ],

@@ -46,7 +46,7 @@ export const findRolesByRoleName = sql_query<ISysRole[], IFindRolesByRoleName>(
         return {
             named: false,
             sql: `select * from sys_role where role_name in (${role
-                .map((a, i) => {
+                .map((_a, i) => {
                     return "$" + (i + 1);
                 })
                 .join(",")})`,

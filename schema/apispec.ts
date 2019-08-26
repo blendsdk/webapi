@@ -24,29 +24,31 @@ const apiSpec: IAPISpecification = {
     version: 1,
     endpoints: [
         {
-            name: "login",
             method: "post",
-            absoluteUrl: true,
+            skipVersioning: true,
             url: "/api/login",
             secure: false,
-            controller: "loginController",
-            imports: [{ name: "loginController", from: "./controllers/authentication/loginController" }],
-            request: authenticationRequest,
-            response: {
-                200: {}
+            backend: {
+                controller: { name: "loginController", from: "./controllers/authentication/loginController" },
+                requestType: authenticationRequest,
+                responseType: authenticationResponse
+            },
+            frontend: {
+                methodName: "authenticate"
             }
         },
         {
-            name: "greet",
             method: "post",
-            absoluteUrl: true,
+            skipVersioning: true,
             url: "/api/greet/:name?/name",
             secure: true,
-            controller: "greetController",
-            imports: [{ name: "greetController", from: "./controllers/authentication/greetController" }],
-            request: greetRequest,
-            response: {
-                200: {}
+            backend: {
+                controller: { name: "greetController", from: "./controllers/authentication/greetController" },
+                requestType: greetRequest,
+                responseType: greetResponse
+            },
+            frontend: {
+                methodName: "sayHello"
             }
         }
     ],

@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import * as path from "path";
 import { asyncForEach } from "@blendsdk/stdlib";
-import { generateInterfacesFromTables, generateDataAccessLayer, generateRouter } from "@blendsdk/codekit";
+import { generateInterfacesFromTables, generateDataAccessLayer, generateRestFramework } from "@blendsdk/codekit";
 import dotenv from "dotenv";
 import { createConnection, closeConnection } from "@blendsdk/sqlkit";
 import { database } from "./database";
@@ -16,13 +16,17 @@ console.log(chalk.green("Creating DB Types"));
 generateInterfacesFromTables(path.join(process.cwd(), "src", "database", "dbtypes.ts"), database.getTables());
 
 console.log(chalk.green("Creating Routes"));
-generateRouter(apiSpec, {
+generateRestFramework(apiSpec, {
     routerOutFile: "src/routes.ts",
-    typesOutFile: ["src/common/api_types.ts", "/Users/gevik/Workspace/github/client1/src/api_types.ts"]
+    routerTypesOutFile: "src/common/api_types.ts",
+    clientOutFile: "../temp/client.ts",
+    clientTypesOutFile: "../temp/api_types.ts"
 });
-generateRouter(testApiSpec, {
+generateRestFramework(testApiSpec, {
     routerOutFile: "src/tests/routes.ts",
-    typesOutFile: "src/tests/test_api_types.ts"
+    routerTypesOutFile: "src/tests/test_api_types.ts",
+    clientOutFile: "../temp/test/client.ts",
+    clientTypesOutFile: "../test/temp/api_types.ts"
 });
 
 console.log(chalk.green("Creating DB CRUD"));
