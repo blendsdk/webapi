@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import compression from "compression"; // compresses requests
 import bodyParser from "body-parser";
 import lusca from "lusca";
@@ -7,8 +7,8 @@ import path from "path";
 import bearerToken from "express-bearer-token";
 import cors from "cors";
 import { logger } from "./logger";
-import { buildRoutes } from "@blendsdk/express";
-import { routes } from "./routes";
+import { buildRoutes, getParameters } from "@blendsdk/express";
+import ApiRoutes from "./routes";
 
 // Load environment variables from .env file, where API keys and passwords are configured
 dotenv.config({ path: ".env" });
@@ -28,7 +28,16 @@ app.use(lusca.xssProtection(true));
 app.use(bearerToken());
 app.use(cors({ origin: "*" }));
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
-buildRoutes(app, routes);
+app.use((req: Request, _res: Response, next: NextFunction) => {
+    logger.debug(["Request", getParameters<any>(req)]);
+    return next();
+});
+
+buildRoutes(app, ApiRoutes);
+if (process.env.NODE_JEST) {
+    logger.info("Enabling test routes");
+    buildRoutes(app, require("./tests/routes").default);
+}
 logger.info(`Application initialized at ${new Date()}`);
 
 export default app;

@@ -1,9 +1,5 @@
-import { app, server } from "../server";
+import { app } from "../server";
 import request from "supertest";
-
-afterAll(() => {
-    server.close();
-});
 
 test("list parameter", async () => {
     const response = await request(app)
@@ -46,7 +42,7 @@ test("number parameter", async () => {
 
 test("float parameter", async () => {
     const response = await request(app)
-        .post("/api/params?q=10")
+        .post("/api/params/10")
         .set("Content-Type", "application/json")
         .set("Accept", "application/json")
         .send({

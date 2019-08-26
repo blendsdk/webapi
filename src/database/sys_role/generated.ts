@@ -4,49 +4,70 @@
  */
 import { ISysRole } from "../dbtypes";
 import { sql_insert, sql_query, sql_update, sql_delete } from "@blendsdk/sqlkit";
+
 /**
  * Insert a record into the sys_role relation
  */
 export const insertIntoSysRole = sql_insert<ISysRole, ISysRole>("sys_role");
+
 /**
- * Interface describing a getSysRoleByRoleId record.
+ * The IGetSysRoleByRoleId interface.
  *
  * @interface IGetSysRoleByRoleId
  * @export
  */
 export interface IGetSysRoleByRoleId {
+	/**
+	 * @type {number}
+	 * @memberof IGetSysRoleByRoleId
+	 */
 	role_id?: number;
 }
 
 /**
  * Gets a record from the sys_role relation
  */
-export const getSysRoleByRoleId = sql_query<ISysRole, IGetSysRoleByRoleId>("SELECT * FROM sys_role WHERE role_id = :role_id", { single: true });
+export const getSysRoleByRoleId = sql_query<ISysRole, IGetSysRoleByRoleId>(
+	"SELECT * FROM sys_role WHERE role_id = :role_id",
+	{ single: true }
+);
+
 /**
- * Interface describing a updateSysRoleByRoleId record.
+ * The IUpdateSysRoleByRoleId interface.
  *
  * @interface IUpdateSysRoleByRoleId
  * @export
  */
 export interface IUpdateSysRoleByRoleId {
+	/**
+	 * @type {number}
+	 * @memberof IUpdateSysRoleByRoleId
+	 */
 	role_id?: number;
 }
 
 /**
  * Updates a record from the sys_role relation
  */
-export const updateSysRoleByRoleId = sql_update<ISysRole, ISysRole, IUpdateSysRoleByRoleId>("sys_role", { single: true } );
+export const updateSysRoleByRoleId = sql_update<ISysRole, ISysRole, IUpdateSysRoleByRoleId>("sys_role", {
+	single: true
+});
+
 /**
- * Interface describing a deleteSysRoleByRoleId record.
+ * The IDeleteSysRoleByRoleId interface.
  *
  * @interface IDeleteSysRoleByRoleId
  * @export
  */
 export interface IDeleteSysRoleByRoleId {
+	/**
+	 * @type {number}
+	 * @memberof IDeleteSysRoleByRoleId
+	 */
 	role_id?: number;
 }
 
 /**
  * Deletes a record from the sys_role relation
  */
-export const deleteSysRoleByRoleId = sql_delete<ISysRole, IDeleteSysRoleByRoleId>("sys_role", { single: true } );
+export const deleteSysRoleByRoleId = sql_delete<ISysRole, IDeleteSysRoleByRoleId>("sys_role", { single: true });
