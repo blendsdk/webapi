@@ -34,7 +34,11 @@ const apiSpec: IAPISpecification = {
                 responseType: authenticationResponse
             },
             frontend: {
-                methodName: "authenticate"
+                methodName: "authenticate",
+                controller: {
+                    name: "AuthenticationEndpointHandler",
+                    from: "./AuthenticationEndpointHandler"
+                }
             }
         },
         {
