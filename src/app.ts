@@ -9,9 +9,13 @@ import cors from "cors";
 import { logger } from "./logger";
 import { buildRoutes, getParameters } from "@blendsdk/express";
 import ApiRoutes from "./routes";
+import { initializeMailer } from "./services/mailer";
 
 // Load environment variables from .env file, where API keys and passwords are configured
 dotenv.config({ path: ".env" });
+
+// Initializing the SMTPMailer
+initializeMailer();
 
 // Create Express server
 const app = express();

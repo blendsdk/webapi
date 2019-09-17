@@ -145,19 +145,21 @@
     prettier "1.18.2"
     tslib "^1.10.0"
 
-"@blendsdk/express@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-1.1.4.tgz#ea36bf1fc7bdf1e0bc6251472b8a4e061a8ae63f"
-  integrity sha512-q8HAESyDRx/1lq37cwF4xCk61xcVLDV32/DO0lJHwCQv7px1rlxmj1iDLWueuizuw4H2cNIfyAuQJ1OB6FwOOg==
+"@blendsdk/express@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-1.1.5.tgz#0f55cce04b24130577f0ac0f41a5381f2cd4b6ce"
+  integrity sha512-U5/CBeCVb6IL+stOaJujXw5exPHyVAv/A7Vf7m+C95NOo/ZyJ+VcmeJDM1RIBcct0IQ+/76An23B0pXpw6F3qQ==
   dependencies:
     "@blendsdk/stdlib" "^1.1.4"
     "@types/express" "^4.17.1"
     "@types/express-session" "^1.15.13"
     "@types/jsonwebtoken" "^8.3.3"
     "@types/node" "^12.7.2"
+    "@types/nodemailer" "^6.2.1"
     express "^4.17.1"
     express-validator "^6.1.1"
     jsonwebtoken "^8.5.1"
+    nodemailer "^6.3.0"
     winston "^3.2.1"
 
 "@blendsdk/schemakit@^1.1.4":
