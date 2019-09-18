@@ -2,17 +2,21 @@ import express, { Request, Response, NextFunction } from "express";
 import compression from "compression"; // compresses requests
 import bodyParser from "body-parser";
 import lusca from "lusca";
-import dotenv from "dotenv";
 import path from "path";
 import bearerToken from "express-bearer-token";
 import cors from "cors";
 import { logger } from "./logger";
-import { buildRoutes, getParameters } from "@blendsdk/express";
+import { buildRoutes, getParameters, loadConfiguration   } from "@blendsdk/express";
 import ApiRoutes from "./routes";
 import { initializeMailer } from "./services/mailer";
 
-// Load environment variables from .env file, where API keys and passwords are configured
-dotenv.config({ path: ".env" });
+
+// Set the default environment to development
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+loadConfiguration([
+    "./config/config.base.json",
+    "./config/config.%node_env%.json"
+]);
 
 // Initializing the SMTPMailer
 initializeMailer();
