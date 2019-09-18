@@ -15,7 +15,8 @@ import { initializeMailer } from "./services/mailer";
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 loadConfiguration([
     "./config/config.base.json",
-    "./config/config.%node_env%.json"
+    "./config/config.%node_env%.json",
+    "./config/.config.local.json"
 ]);
 
 // Initializing the SMTPMailer
