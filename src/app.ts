@@ -27,7 +27,7 @@ const app = express();
 
 // Express configuration
 app.set("port", process.env.PORT || 3000);
-app.set("views", path.join(__dirname, "../views"));
+app.set("views", path.join(process.cwd(), "views"));
 app.set("view engine", "ejs");
 app.use(compression());
 app.use(bodyParser.json());
@@ -36,7 +36,7 @@ app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 app.use(bearerToken());
 app.use(cors({ origin: "*" }));
-app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
+app.use(express.static(path.join(process.cwd(), "public"), { maxAge: process.env.STATIC_FILES_MAX_AGE || 31557600000 }));
 app.use((req: Request, _res: Response, next: NextFunction) => {
     logger.debug(["Request", getParameters<any>(req)]);
     return next();
