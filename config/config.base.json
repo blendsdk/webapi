@@ -14,5 +14,6 @@
     "SMTP_PORT":587,
     "SMTP_USERNAME":"user",
     "SMTP_PASSWORD":"********",
-    "SMTP_SECURE": false    
+    "SMTP_SECURE": false,
+    "STATIC_FILES_MAX_AGE": 31557600000
 }
