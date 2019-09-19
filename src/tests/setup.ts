@@ -1,10 +1,16 @@
-import dotenv from "dotenv";
 import { asyncForEach } from "@blendsdk/stdlib";
 import { createConnection, closeConnection as closeConnectionServer } from "@blendsdk/sqlkit";
 import * as fs from "fs";
 import * as path from "path";
+import { loadConfiguration } from "@blendsdk/express";
+import { fromRoot } from "../utils";
 
-dotenv.config({ path: ".env.test" });
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+loadConfiguration([
+    fromRoot("config", "config.base.json"),
+    fromRoot("config", "config.%node_env%.json"),
+    fromRoot("config", ".config.local.json")
+]);
 
 export const openConnection = () => {
     return createConnection();
